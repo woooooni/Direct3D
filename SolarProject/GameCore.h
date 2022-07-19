@@ -1,10 +1,12 @@
 #pragma once
 #include "pch.h"
+
 class GameCore
 {
 public:
 	SINGLETON(GameCore);
 private:
+	
 	HWND	m_hWnd = NULL;	// 메인 윈도우 핸들
 	HDC		m_hDC;			// 메인 윈도우 DC
 	POINT	m_ptResolution;	// 메인 윈도우 해상도
