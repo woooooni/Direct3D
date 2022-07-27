@@ -14,16 +14,18 @@ D3DClass::D3DClass()
 	, m_pDepthStencilState(nullptr)
 	, m_pDepthStencilView(nullptr)
 	, m_pRasterizerState(nullptr)
+	, m_projectionMatrix{}
+	, m_worldMatrix{}
+	, m_orthoMatrix{}
 	
 {
 }
-
 
 D3DClass::~D3DClass()
 {
 }
 
-bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _bFullscreen)
+bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _bFullscreen, float screenDepth, float screenNear)
 {
 	
 	m_bVsync = _bVSync; // 1. 수직 동기화 상태 저장.
@@ -90,6 +92,8 @@ bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _b
 	// TODO:: 대체할 함수 혹은 오류 수정.
 	/*size_t stringLength = 0;
 	if (wcstombs_s(&stringLength, m_videoCardDescription, 128, strName, 128) != 0) return false;*/
+
+	m_videoCardDescription = adapterDesc.Description;
 
 	// 11. 어댑터 및 팩토리 관련 변수 해제
 	// 디스플레이 모드 리스트를 해제
@@ -330,20 +334,91 @@ bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _b
 	return true;
 }
 
-void D3DClass::GetProjectionMatrix(XMMATRIX _matrix)
+
+void D3DClass::BeginRender(HDC _dc)
 {
+	// 버퍼를 지울 색을 설정합니다
+	float color[4] = { .5f, .5f, .5f, 1.f };
+
+	// 백버퍼를 지웁니다
+	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, color);
+
+	// 깊이 버퍼를 지웁니다
+	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
-void D3DClass::GetWorldMatrix(XMMATRIX _matrix)
+
+
+void D3DClass::EndRender(HDC _dc)
 {
+	// 렌더링이 완료되었으므로 화면에 백 버퍼를 표시합니다.
+	if (m_bVsync)
+	{
+		// 화면 새로 고침 비율을 고정합니다.
+		m_pSwapChain->Present(1, 0);
+	}
+	else
+	{
+		// 가능한 빠르게 출력
+		m_pSwapChain->Present(0, 0);
+	}
 }
 
-void D3DClass::GetOrthoMatrix(XMMATRIX _matrix)
+void D3DClass::Shutdown()
 {
-}
+	// 종료 전 윈도우 모드로 설정하지 않으면 스왑 체인을 해제 할 때 예외가 발생합니다.
+	if (m_pSwapChain)
+	{
+		m_pSwapChain->SetFullscreenState(false, NULL);
+	}
 
-void D3DClass::GetVideoCardInfo(wchar_t*, int&)
-{
+	if (m_pRasterizerState)
+	{
+		m_pRasterizerState->Release();
+		m_pRasterizerState = 0;
+	}
+
+	if (m_pDepthStencilView)
+	{
+		m_pDepthStencilView->Release();
+		m_pDepthStencilView = 0;
+	}
+
+	if (m_pDepthStencilState)
+	{
+		m_pDepthStencilState->Release();
+		m_pDepthStencilState = 0;
+	}
+
+	if (m_pDepthStencilBuffer)
+	{
+		m_pDepthStencilBuffer->Release();
+		m_pDepthStencilBuffer = 0;
+	}
+
+	if (m_pRenderTargetView)
+	{
+		m_pRenderTargetView->Release();
+		m_pRenderTargetView = 0;
+	}
+
+	if (m_pDeviceContext)
+	{
+		m_pDeviceContext->Release();
+		m_pDeviceContext = 0;
+	}
+
+	if (m_pDevice)
+	{
+		m_pDevice->Release();
+		m_pDevice = 0;
+	}
+
+	if (m_pSwapChain)
+	{
+		m_pSwapChain->Release();
+		m_pSwapChain = 0;
+	}
 }
 
 

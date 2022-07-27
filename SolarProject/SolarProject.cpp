@@ -64,11 +64,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
             }
-
-            else
-            {
-                GameCore::GetInst()->progress();
-            }
+        }
+        else
+        {
+            GameCore::GetInst()->progress();
         }
         
     }

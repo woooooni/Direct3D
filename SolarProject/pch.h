@@ -14,10 +14,13 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 #include "define.h"
-#include <d3d9.h>
+
+
 #include <d3d11.h>
-#include<d3dcompiler.h>
-#include<d3dcaps.h>
+#include <d3dtypes.h>
+#include <d3dcompiler.h>
+#include <d3dcaps.h>
+
 
 #include<string>
 using namespace std;

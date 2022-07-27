@@ -20,6 +20,12 @@
     <Filter Include="Direct">
       <UniqueIdentifier>{8cf79da7-9460-4219-84f1-015aa32f8761}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Direct\01. Header">
+      <UniqueIdentifier>{7b1494e4-78a5-4cc6-b385-13e17a5ab2de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct\02. VertexShader">
+      <UniqueIdentifier>{396d2772-07c8-4f79-9471-4f559ce02b88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -44,11 +50,11 @@
       <Filter>Engine\01. Header</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="D3DClass.h">
-      <Filter>Direct</Filter>
-    </ClInclude>
     <ClInclude Include="AlignedAllocationPolicy.h">
       <Filter>Direct</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DClass.h">
+      <Filter>Direct\01. Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +78,7 @@
       <Filter>Engine\02. Core</Filter>
     </ClCompile>
     <ClCompile Include="D3DClass.cpp">
-      <Filter>Direct</Filter>
+      <Filter>Direct\01. Header</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
