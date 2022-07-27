@@ -17,6 +17,9 @@
     <Filter Include="Engine\01. Header">
       <UniqueIdentifier>{2b12618f-e357-40c0-ac5c-adfe3fcc8755}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Direct">
+      <UniqueIdentifier>{8cf79da7-9460-4219-84f1-015aa32f8761}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -41,6 +44,12 @@
       <Filter>Engine\01. Header</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="D3DClass.h">
+      <Filter>Direct</Filter>
+    </ClInclude>
+    <ClInclude Include="AlignedAllocationPolicy.h">
+      <Filter>Direct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SolarProject.rc">
@@ -61,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="GameCore.cpp">
       <Filter>Engine\02. Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DClass.cpp">
+      <Filter>Direct</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -129,6 +129,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AlignedAllocationPolicy.h" />
+    <ClInclude Include="D3DClass.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameCore.h" />
@@ -139,6 +141,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D3DClass.cpp" />
     <ClCompile Include="GameCore.cpp" />
     <ClCompile Include="SolarProject.cpp" />
   </ItemGroup>
