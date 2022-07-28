@@ -23,6 +23,7 @@ D3DClass::D3DClass()
 
 D3DClass::~D3DClass()
 {
+	Shutdown();
 }
 
 bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _bFullscreen, float screenDepth, float screenNear)
@@ -150,14 +151,7 @@ bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _b
 	swapChainDesc.SampleDesc.Quality = 0;	// 원하는 품질 수준
 
 	//창모드 or 풀스크린 설정
-	if (_bFullscreen)
-	{
-		swapChainDesc.Windowed = false;
-	}
-	else
-	{
-		swapChainDesc.Windowed = true;
-	}
+	swapChainDesc.Windowed = !_bFullscreen;
 
 	// 스캔라인 순서 및 크기를 지정하지 않음으로 설정.
 	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
@@ -338,7 +332,7 @@ bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _b
 void D3DClass::BeginRender(HDC _dc)
 {
 	// 버퍼를 지울 색을 설정합니다
-	float color[4] = { .5f, .5f, .5f, 1.f };
+	float color[4] = { 0.f, 0.f, 0.f, 1.0f };
 
 	// 백버퍼를 지웁니다
 	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, color);

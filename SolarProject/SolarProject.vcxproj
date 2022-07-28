@@ -119,6 +119,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,6 +132,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AlignedAllocationPolicy.h" />
+    <ClInclude Include="D3DCamera.h" />
+    <ClInclude Include="D3DColorShader.h" />
+    <ClInclude Include="D3DModel.h" />
     <ClInclude Include="D3DClass.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="framework.h" />
@@ -141,6 +146,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D3DCamera.cpp" />
+    <ClCompile Include="D3DColorShader.cpp" />
+    <ClCompile Include="D3DModel.cpp" />
     <ClCompile Include="D3DClass.cpp" />
     <ClCompile Include="GameCore.cpp" />
     <ClCompile Include="SolarProject.cpp" />
@@ -151,6 +159,10 @@
   <ItemGroup>
     <Image Include="small.ico" />
     <Image Include="SolarProject.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="color.ps" />
+    <None Include="color.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

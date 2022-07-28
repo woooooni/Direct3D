@@ -13,13 +13,12 @@
 #include <tchar.h>
 #include <stdlib.h>
 #include <crtdbg.h>
-#include "define.h"
-
 
 #include <d3d11.h>
 #include <d3dtypes.h>
 #include <d3dcompiler.h>
 #include <d3dcaps.h>
+
 
 
 #include<string>
@@ -29,5 +28,6 @@ using namespace std;
 using namespace DirectX;
 
 
+#include "define.h"
 //warning C4316Ã³¸®
 #include "AlignedAllocationPolicy.h"

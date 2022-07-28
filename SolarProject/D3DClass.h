@@ -31,8 +31,8 @@ public:
 	void SetOrthoMatrix(XMMATRIX _matrix) { m_orthoMatrix = _matrix; };
 
 	XMMATRIX GetProjectionMatrix() { return m_projectionMatrix; };
-	XMMATRIX GetWorldMatrix(XMMATRIX _matrix) { return m_worldMatrix; }
-	XMMATRIX GetOrthoMatrix(XMMATRIX _matrix) { return m_orthoMatrix; }
+	XMMATRIX GetWorldMatrix() { return m_worldMatrix; }
+	XMMATRIX GetOrthoMatrix() { return m_orthoMatrix; }
 
 	void GetVideoCardInfo(wstring& _cardName, int& _memory) 
 	{ 

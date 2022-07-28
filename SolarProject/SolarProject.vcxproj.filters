@@ -20,11 +20,23 @@
     <Filter Include="Direct">
       <UniqueIdentifier>{8cf79da7-9460-4219-84f1-015aa32f8761}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Direct\01. Header">
+    <Filter Include="Direct\HLSL">
+      <UniqueIdentifier>{1d8fca2a-cf8b-45f1-bba9-807fffbf2426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct\Header">
       <UniqueIdentifier>{7b1494e4-78a5-4cc6-b385-13e17a5ab2de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Direct\02. VertexShader">
+    <Filter Include="Direct\Shader">
       <UniqueIdentifier>{396d2772-07c8-4f79-9471-4f559ce02b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct\Shader\Color">
+      <UniqueIdentifier>{f2c8093e-a27e-404b-8439-a27328e3bf88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct\Model">
+      <UniqueIdentifier>{138b7497-4631-43cb-ac01-27c8192cfea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct\Camera">
+      <UniqueIdentifier>{97324e22-9e03-4f1e-8b2e-b3abb60c0d42}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -50,11 +62,20 @@
       <Filter>Engine\01. Header</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="D3DColorShader.h">
+      <Filter>Direct\Shader\Color</Filter>
+    </ClInclude>
     <ClInclude Include="AlignedAllocationPolicy.h">
-      <Filter>Direct</Filter>
+      <Filter>Direct\Header</Filter>
     </ClInclude>
     <ClInclude Include="D3DClass.h">
-      <Filter>Direct\01. Header</Filter>
+      <Filter>Direct</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DModel.h">
+      <Filter>Direct\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DCamera.h">
+      <Filter>Direct\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,8 +98,25 @@
     <ClCompile Include="GameCore.cpp">
       <Filter>Engine\02. Core</Filter>
     </ClCompile>
-    <ClCompile Include="D3DClass.cpp">
-      <Filter>Direct\01. Header</Filter>
+    <ClCompile Include="D3DColorShader.cpp">
+      <Filter>Direct\Shader\Color</Filter>
     </ClCompile>
+    <ClCompile Include="D3DClass.cpp">
+      <Filter>Direct</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DModel.cpp">
+      <Filter>Direct\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DCamera.cpp">
+      <Filter>Direct\Camera</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="color.vs">
+      <Filter>Direct\HLSL</Filter>
+    </None>
+    <None Include="color.ps">
+      <Filter>Direct\HLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>
