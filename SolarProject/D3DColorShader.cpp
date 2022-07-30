@@ -17,11 +17,11 @@ void D3DColorShader::init(ID3D11Device* _pDevice, HWND _hWnd)
 {
 	wchar_t strVsPath[255] = {};
 	GetCurrentDirectory(255, strVsPath);
-	wcscat_s(strVsPath, 255, L"\\color.vs");
+	wcscat_s(strVsPath, 255, L"\\ColorVS.hlsl");
 
 	wchar_t strPsPath[255] = {};
 	GetCurrentDirectory(255, strPsPath);
-	wcscat_s(strPsPath, 255, L"\\color.ps");
+	wcscat_s(strPsPath, 255, L"\\ColorPS.hlsl");
 	
 	InitializeShader(_pDevice, _hWnd, strVsPath, strPsPath);
 }
@@ -43,19 +43,19 @@ bool D3DColorShader::InitializeShader(ID3D11Device* _pDevice, HWND _hWnd, const 
 
 	//버텍스 쉐이더 코드를 컴파일
 	ID3D10Blob* vertexShaderBuffer = nullptr;
-	HRESULT result = D3DCompileFromFile(
-		_vsFileName, NULL, NULL, "ColorVertexShader", "vs_5_0",
-		D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errMsg);
 
 	if (FAILED(D3DCompileFromFile(
 		_vsFileName, NULL, NULL, "ColorVertexShader", "vs_5_0",
 		D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errMsg)))
 	{
-		OutputShaderErrorMessage(errMsg, _hWnd, _vsFileName);
-	}
-	else
-	{
-		MessageBox(_hWnd, _vsFileName, L"Missing Shader File", MB_OK);
+		if (errMsg)
+		{
+			OutputShaderErrorMessage(errMsg, _hWnd, _vsFileName);
+		}
+		else
+		{
+			MessageBox(_hWnd, _vsFileName, L"Missing Shader File", MB_OK);
+		}
 	}
 	
 	//픽셀 쉐이더 코드를 컴파일
@@ -64,11 +64,15 @@ bool D3DColorShader::InitializeShader(ID3D11Device* _pDevice, HWND _hWnd, const 
 		_psFileName, NULL, NULL, "ColorPixelShader", "ps_5_0",
 		D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errMsg)))
 	{
-		OutputShaderErrorMessage(errMsg, _hWnd, _vsFileName);
-	}
-	else
-	{
-		MessageBox(_hWnd, _vsFileName, L"Missing Shader File", MB_OK);
+		if (errMsg)
+		{
+			OutputShaderErrorMessage(errMsg, _hWnd, _vsFileName);
+		}
+		else
+		{
+			MessageBox(_hWnd, _vsFileName, L"Missing Shader File", MB_OK);
+			return false;
+		}
 	}
 
 
@@ -126,11 +130,8 @@ bool D3DColorShader::InitializeShader(ID3D11Device* _pDevice, HWND _hWnd, const 
 	}
 
 	// 더 이상 사용되지 않는 정점 셰이더 퍼버와 픽셀 셰이더 버퍼를 해제.
-	vertexShaderBuffer->Release();
-	vertexShaderBuffer = 0;
-
-	pixelShaderBuffer->Release();
-	pixelShaderBuffer = 0;
+	Safe_Release(vertexShaderBuffer);
+	Safe_Release(pixelShaderBuffer);
 
 	// 정점 셰이더에 있는 행렬 상수 버퍼의 구조체를 작성
 	D3D11_BUFFER_DESC matrixBufferDesc;
@@ -151,30 +152,10 @@ bool D3DColorShader::InitializeShader(ID3D11Device* _pDevice, HWND _hWnd, const 
 
 void D3DColorShader::ShutDownShader()
 {
-	if (nullptr != m_matrixBuffer) 
-	{
-		m_matrixBuffer->Release();
-		m_matrixBuffer = 0;
-	}
-
-	if (nullptr != m_layout)
-	{
-		m_layout->Release();
-		m_layout = 0;
-	}
-
-	if (nullptr != m_pixelShader)
-	{
-		m_pixelShader->Release();
-		m_pixelShader = 0;
-	}
-
-	if (nullptr != m_vertexShader)
-	{
-		m_vertexShader->Release();
-		m_vertexShader = 0;
-	}
-
+	Safe_Release(m_matrixBuffer);
+	Safe_Release(m_layout);
+	Safe_Release(m_pixelShader);
+	Safe_Release(m_vertexShader);
 }
 
 void D3DColorShader::OutputShaderErrorMessage(ID3D10Blob* _pErr, HWND _hWnd, const wchar_t* _shaderFileName)

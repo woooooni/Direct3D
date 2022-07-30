@@ -102,16 +102,13 @@ bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _b
 	displayModeList = 0;
 
 	// 출력 어뎁터를 해제
-	adapterOutput->Release();
-	adapterOutput = 0;
+	Safe_Release(adapterOutput);
 
 	// 어뎁터를 해제
-	adapter->Release();
-	adapter = 0;
+	Safe_Release(adapter);
 
 	// 팩토리 객체를 해제
-	factory->Release();
-	factory = 0;
+	Safe_Release(factory);
 
 	// 12. 스왑체인 구조체 초기화
 	DXGI_SWAP_CHAIN_DESC swapChainDesc;
@@ -182,8 +179,7 @@ bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _b
 	if (FAILED(m_pDevice->CreateRenderTargetView(backBufferPtr, NULL, &m_pRenderTargetView))) return false;
 
 	// 백버퍼 포인터 해제
-	backBufferPtr->Release();
-	backBufferPtr = 0;
+	Safe_Release(backBufferPtr);
 
 
 	// 15. 깊이 버퍼 텍스쳐 생성
@@ -308,7 +304,6 @@ bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _b
 
 
 	// 3D 렌더링을위한 투영 행렬 만들기
-	// TODO:: 수정.
 	m_projectionMatrix = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
 
 
@@ -322,7 +317,6 @@ bool D3DClass::Initialize(HWND _hWnd, POINT _ptResolution, bool _bVSync, bool _b
 	// 23. 직교 투영 행렬
 	// UI처럼 원근감이 필요없는 물체는 일반 투영행렬이 아닌 직교 투영행렬이 필요함. -> FOV만 빼면 됨.
 	// 2D 렌더링을위한 직교 투영 행렬을 만듭니다
-	// TODO:: 수정.
 	m_orthoMatrix = XMMatrixOrthographicLH((float)_ptResolution.x, (float)_ptResolution.y, screenNear, screenDepth);
 
 	return true;
@@ -366,53 +360,14 @@ void D3DClass::Shutdown()
 		m_pSwapChain->SetFullscreenState(false, NULL);
 	}
 
-	if (m_pRasterizerState)
-	{
-		m_pRasterizerState->Release();
-		m_pRasterizerState = 0;
-	}
-
-	if (m_pDepthStencilView)
-	{
-		m_pDepthStencilView->Release();
-		m_pDepthStencilView = 0;
-	}
-
-	if (m_pDepthStencilState)
-	{
-		m_pDepthStencilState->Release();
-		m_pDepthStencilState = 0;
-	}
-
-	if (m_pDepthStencilBuffer)
-	{
-		m_pDepthStencilBuffer->Release();
-		m_pDepthStencilBuffer = 0;
-	}
-
-	if (m_pRenderTargetView)
-	{
-		m_pRenderTargetView->Release();
-		m_pRenderTargetView = 0;
-	}
-
-	if (m_pDeviceContext)
-	{
-		m_pDeviceContext->Release();
-		m_pDeviceContext = 0;
-	}
-
-	if (m_pDevice)
-	{
-		m_pDevice->Release();
-		m_pDevice = 0;
-	}
-
-	if (m_pSwapChain)
-	{
-		m_pSwapChain->Release();
-		m_pSwapChain = 0;
-	}
+	Safe_Release(m_pRasterizerState);
+	Safe_Release(m_pDepthStencilView);
+	Safe_Release(m_pDepthStencilState);
+	Safe_Release(m_pDepthStencilBuffer);
+	Safe_Release(m_pRenderTargetView);
+	Safe_Release(m_pDeviceContext);
+	Safe_Release(m_pDevice);
+	Safe_Release(m_pSwapChain);
 }
 
 

@@ -63,10 +63,10 @@ bool D3DModel::InitializeBuffers(ID3D11Device* _pDevice)
 	vertices[0].color = XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f);
 
 	vertices[1].position = XMFLOAT3(0.0f, 1.0f, 0.0f);  // Top middle.
-	vertices[1].color = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
+	vertices[1].color = XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f);
 
 	vertices[2].position = XMFLOAT3(1.0f, -1.0f, 0.0f);  // Bottom right.
-	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f);
+	vertices[2].color = XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f);
 
 	// 인덱스 배열의 값을 설정.
 	indices[0] = 0;  // Bottom left.
@@ -129,18 +129,8 @@ bool D3DModel::InitializeBuffers(ID3D11Device* _pDevice)
 
 void D3DModel::ShutdownBuffers()
 {
-	if (m_indexBuffer != nullptr)
-	{
-		m_indexBuffer->Release();
-		m_indexBuffer = 0;
-	}
-
-	if (m_vertexBuffer != nullptr)
-	{
-		m_vertexBuffer->Release();
-		m_vertexBuffer = 0;
-	}
-		
+	Safe_Release(m_indexBuffer);
+	Safe_Release(m_vertexBuffer);
 }
 
 void D3DModel::RenderBuffers(ID3D11DeviceContext* _pDevCon)

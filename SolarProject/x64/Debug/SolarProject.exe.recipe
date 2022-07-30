@@ -5,7 +5,14 @@
       <FullPath>C:\Users\TinyPrince\Desktop\Study\Cpp\Direct3D\SolarProject\x64\Debug\SolarProject.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
-  <ContentFiles />
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\TinyPrince\Desktop\Study\Cpp\Direct3D\SolarProject\x64\Debug\ColorPS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\TinyPrince\Desktop\Study\Cpp\Direct3D\SolarProject\x64\Debug\ColorVS.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
   <SatelliteDlls />
   <NonRecipeFileRefs />
 </Project>

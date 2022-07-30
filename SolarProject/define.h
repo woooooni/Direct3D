@@ -14,6 +14,7 @@
 #define VSYNC_ENABLED false
 #define SCREEN_DEPTH 1000.0f
 #define SCREEN_NEAR 0.1f
+#define Safe_Release(type) if(nullptr != type) type->Release(); type = 0;
 
 enum class BRUSH_TYPE
 {
