@@ -44,6 +44,30 @@
     <Filter Include="Direct\HLSL\Color">
       <UniqueIdentifier>{97617637-1341-42f8-b181-7f06245b0dad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Direct\HLSL\Texture">
+      <UniqueIdentifier>{d6ccf932-e6f6-4f15-86e2-2d8d8d116cf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\03. Manager">
+      <UniqueIdentifier>{0c4a0b84-5809-4e80-9629-09082792fdd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\04. Object">
+      <UniqueIdentifier>{26a966de-f563-43b4-a854-51764fa4e12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\05. Scene">
+      <UniqueIdentifier>{7c07b392-aac6-466d-a941-9b63e686afb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\06. Resource">
+      <UniqueIdentifier>{2ba57db9-752a-4632-b8db-7863f11bc30c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\07. Component">
+      <UniqueIdentifier>{d560bd81-d7ff-481b-a9ab-23f4ef6d8f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\08. Module">
+      <UniqueIdentifier>{4537a8a6-39dc-4b68-9fcc-75e8683d7a87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\09. Factory">
+      <UniqueIdentifier>{e25a6056-36aa-4744-af7e-2461e6a2384e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -83,6 +107,12 @@
     <ClInclude Include="D3DCamera.h">
       <Filter>Direct\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="D3DTextureShader.h">
+      <Filter>Direct\Shader\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>Game\06. Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SolarProject.rc">
@@ -116,6 +146,12 @@
     <ClCompile Include="D3DCamera.cpp">
       <Filter>Direct\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="D3DTextureShader.cpp">
+      <Filter>Direct\Shader\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>Game\06. Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ColorPS.hlsl">
@@ -123,6 +159,12 @@
     </FxCompile>
     <FxCompile Include="ColorVS.hlsl">
       <Filter>Direct\HLSL\Color</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturePS.hlsl">
+      <Filter>Direct\HLSL\Texture</Filter>
+    </FxCompile>
+    <FxCompile Include="TextureVS.hlsl">
+      <Filter>Direct\HLSL\Texture</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

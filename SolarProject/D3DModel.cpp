@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "CTexture.h"
 #include "D3DModel.h"
 
 D3DModel::D3DModel()
@@ -6,6 +7,7 @@ D3DModel::D3DModel()
 	, m_indexBuffer(nullptr)
 	, m_vertexCount(0)
 	, m_indexCount(0)
+	, m_pTex(nullptr)
 	
 {
 
@@ -16,9 +18,13 @@ D3DModel::~D3DModel()
 
 }
 
-void D3DModel::init(ID3D11Device* _pDevice)
+void D3DModel::init(ID3D11Device* _pDevice, ID3D11DeviceContext* _pDevCon, const wchar_t* _textureFilePath)
 {
+	wchar_t strFilePath[255] = {};
+	GetCurrentDirectory(255, strFilePath);
+	wcscat_s(strFilePath, 255, _textureFilePath);
 	InitializeBuffers(_pDevice);
+	LoadTexture(_pDevice, _pDevCon, strFilePath);
 }
 
 void D3DModel::Clear()
@@ -131,6 +137,7 @@ void D3DModel::ShutdownBuffers()
 {
 	Safe_Release(m_indexBuffer);
 	Safe_Release(m_vertexBuffer);
+	ReleaseTexture();
 }
 
 void D3DModel::RenderBuffers(ID3D11DeviceContext* _pDevCon)
@@ -147,4 +154,19 @@ void D3DModel::RenderBuffers(ID3D11DeviceContext* _pDevCon)
 
 	// 정점 버퍼로 그릴 기본형을 설정. 여기서는 삼각형으로 설정.
 	_pDevCon->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+}
+
+void D3DModel::LoadTexture(ID3D11Device* _pDevice, ID3D11DeviceContext* _pDevCon, const wchar_t* _strFilePath)
+{
+	m_pTex = new CTexture;
+	m_pTex->init(_pDevice, _pDevCon, _strFilePath);
+}
+
+void D3DModel::ReleaseTexture()
+{
+	if (nullptr != m_pTex) 
+	{
+		m_pTex->Clear();
+		delete m_pTex;
+	}
 }

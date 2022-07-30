@@ -12,6 +12,12 @@
     <ContentFile>
       <FullPath>C:\Users\TinyPrince\Desktop\Study\Cpp\Direct3D\SolarProject\x64\Debug\ColorVS.cso</FullPath>
     </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\TinyPrince\Desktop\Study\Cpp\Direct3D\SolarProject\x64\Debug\TexturePS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\TinyPrince\Desktop\Study\Cpp\Direct3D\SolarProject\x64\Debug\TextureVS.cso</FullPath>
+    </ContentFile>
   </ContentFiles>
   <SatelliteDlls />
   <NonRecipeFileRefs />

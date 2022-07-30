@@ -161,10 +161,7 @@ void D3DColorShader::ShutDownShader()
 void D3DColorShader::OutputShaderErrorMessage(ID3D10Blob* _pErr, HWND _hWnd, const wchar_t* _shaderFileName)
 {
 	OutputDebugStringA(reinterpret_cast<const char*>(_pErr->GetBufferPointer()));
-
-	_pErr->Release();
-	_pErr = 0;
-
+	Safe_Release(_pErr);
 	MessageBox(_hWnd, _shaderFileName, L"Error Compile Shader", MB_OK);
 
 }

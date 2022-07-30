@@ -5,7 +5,7 @@
 class D3DCamera;
 class D3DModel;
 class D3DColorShader;
-
+class D3DTextureShader;
 class GameCore
 {
 public:
@@ -21,8 +21,8 @@ private:
 
 	D3DCamera*			m_3dCam;
 	D3DModel*			m_3dModel;
-	D3DColorShader*		m_3dShader;
-
+	D3DColorShader*		m_3dColorShader;
+	D3DTextureShader*	m_3dTextureShader;
 public:
 	int init(HWND _hWnd, POINT _ptResolution);
 	void progress();
